@@ -27,7 +27,7 @@ const Banner = () => {
             >
                 <SwiperSlide>
                     <div className="slide-content relative">
-                        <div className='absolute md:mt-8 flex flex-col justify-center items-center space-y-5 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-screen' data-aos="fade-up">
+                        <div className='absolute flex flex-col justify-center items-center space-y-5 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-screen' data-aos="fade-up">
                             <h1 className='text-[#dbeeed] text-6xl'>Manage Your Assets <span className='text-[#ec5349]'>Wisely</span></h1>
                             <p className='text-[#dbeeed] text-xl md:w-1/2 text-center font-Roboto'>Discover tailored asset management solutions to optimize your investments. Our team at <span className='text-[#ec5349] font-Roboto'>[AssetWiseHub]</span> specializes in personalized strategies for individuals and businesses. From investment advisory to comprehensive portfolio analysis and risk assessment, we prioritize your financial goals. Transparency and integrity define our approach, empowering clients with knowledge for informed decision-making. Our commitment is to guide you through the intricacies of the financial landscape.
                             </p>
@@ -45,7 +45,7 @@ const Banner = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <div>
-                        <div className='absolute flex flex-col justify-center items-center space-y-5 md:mt-8 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 21)] h-screen' data-aos="fade-up">
+                        <div className='absolute flex flex-col justify-center items-center space-y-5 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 21)] h-screen' data-aos="fade-up">
                             <h1 className='text-[#dbeeed] text-6xl'>Manage Your Assets <span className='text-[#ec5349]'>Wisely</span></h1>
                             <p className='text-[#dbeeed] text-xl md:w-1/2 text-center font-Roboto'>Discover tailored asset management solutions to optimize your investments. Our team at <span className='text-[#ec5349] font-Roboto'>[AssetWiseHub]</span> specializes in personalized strategies for individuals and businesses. From investment advisory to comprehensive portfolio analysis and risk assessment, we prioritize your financial goals. Transparency and integrity define our approach, empowering clients with knowledge for informed decision-making. Our commitment is to guide you through the intricacies of the financial landscape.
                             </p>
