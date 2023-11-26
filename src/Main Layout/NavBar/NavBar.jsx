@@ -1,8 +1,155 @@
 import { NavLink } from "react-router-dom";
 import Logo from '../../../public/logo/fagnqbmi.png'
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+// import useProfile from "../../Hooks/useProfile";
 
-const NavBar = () => {
+const NavBar = ({info}) => {
+    const { user, Logout } = useContext(AuthContext)
+    const handleToLogout = () => {
+        Logout()
+            .then()
+            .catch()
+    }
     const Links = <>
+    {
+        info?.role === 'admin' ? 
+        <div>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Home
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/assetList"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Asset List
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/addAnAsset"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Add an Asset
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/allRequests"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            All Requests
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/customRequestsLists"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Custom Requests List
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/myEmployeeList"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            My Employee List
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/addAnEmployee"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Add an Employee
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/adminProfile"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Profile
+        </NavLink></li>
+        {user ? '' : <li className="text-[#dbeeed]"><NavLink
+            to="/login"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Login
+        </NavLink></li>}
+        </div>
+        :
+        info?.role === 'employee' ? 
+        <div>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Home
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/myAssets"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            My Assets
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/myTeam"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            My team
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/requestForAnAsset"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Request For an Asset
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/makeACustomRequest"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Make a custom request
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/employeeProfile"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Profile
+        </NavLink></li>
+        {user ? '' : <li className="text-[#dbeeed]"><NavLink
+            to="/login"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Login
+        </NavLink></li>}
+        </div>
+        :
+        <div>
         <li className="text-[#dbeeed]"><NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -26,15 +173,17 @@ const NavBar = () => {
         >
             Join as HR/Admin
         </NavLink></li>
-        <li className="text-[#dbeeed]"><NavLink
+        {user ? '' : <li className="text-[#dbeeed]"><NavLink
             to="/login"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
             }
         >
             Login
-        </NavLink></li>
-
+        </NavLink></li>}
+        </div>
+    }
+    
     </>
     return (
         <div className="navbar bg-[#1a3756] fixed z-10 text-[#dbeeed]">
@@ -49,18 +198,13 @@ const NavBar = () => {
                 </div>
             </div>
             <div className="navbar-center">
-                <img className="h-[50px] w-[50px]" src={Logo} alt="" />
+                <img className="h-[50px] w-[50px]" src={info?.role === 'admin' ? info?.logo : Logo} alt="" />
             </div>
             <div className="navbar-end">
-                <button className="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </button>
-                <button className="btn btn-ghost btn-circle">
-                    <div className="indicator">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                        <span className="badge badge-xs badge-primary indicator-item"></span>
-                    </div>
-                </button>
+                {
+                    user &&
+                    <button onClick={handleToLogout} className="btn bg-[#ec5349] md:mt-2 text-white border-none">Logout</button>
+                }
             </div>
         </div>
     );

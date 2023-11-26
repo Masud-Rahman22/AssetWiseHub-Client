@@ -37,7 +37,7 @@ const Banner = () => {
                                     scale: 1.2,
                                     transition: { duration: 1 },
                                 }}
-                                    whileTap={{ scale: 0.9 }} className='btn bg-[#ec5349] rounded-lg border-none text-[#dbeeed] hover:bg-[#f71404]'>JOIN AS AN EMPLOYEE</motion.button>
+                                    whileTap={{ scale: 0.9 }} className='btn bg-[#ec5349] rounded-lg border-none text-[#dbeeed] hover:bg-[#f71404]'>JOIN AS AN Employee</motion.button>
                             </Link>
                         </div>
                         <img src={slider1} alt="Slide 1 Image" />

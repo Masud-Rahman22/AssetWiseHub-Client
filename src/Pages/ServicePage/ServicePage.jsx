@@ -1,8 +1,26 @@
-import { motion } from "framer-motion"
-const Packages = () => {
+// import { Elements } from "@stripe/react-stripe-js";
+// import CheckoutForm from "./CheckoutForm";
+// import { loadStripe } from "@stripe/stripe-js";
+
+// import { motion } from "framer-motion"
+// const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY);
+const ServicePage = () => {
     return (
-        <div>
+        <div className="h-[70vh]">
+            <p className="text-center text-[#dbeeed] font-Roboto text-2xl md:w-1/2 my-10 mx-auto"><span className="text-3xl text-[#ec5349]">Welcome to our secure payment page!</span> Your transaction is protected by state-of-the-art encryption technology to ensure the safety and confidentiality of your financial information</p>
             <div>
+            {/* <Elements stripe={stripePromise}>
+                    <CheckoutForm />
+                </Elements> */}
+            </div>
+        </div>
+    );
+};
+
+export default ServicePage;
+{/* <div>
+            <div>
+                <p className="text-center text-[#dbeeed] font-Roboto text-2xl md:w-1/2 my-10 mx-auto"><span className="text-3xl text-[#ec5349]">Welcome to our secure payment page!</span> Your transaction is protected by state-of-the-art encryption technology to ensure the safety and confidentiality of your financial information</p>
                 <h1 className="border-2 text-4xl shadow-md p-2 md:w-1/6 text-center text-[#dbeeed] mx-auto">Packages</h1>
             </div>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20 lg:ml-28">
@@ -142,8 +160,4 @@ const Packages = () => {
                     </div>
                 </motion.div>
             </div>
-        </div>
-    );
-};
-
-export default Packages;
+        </div> */}
