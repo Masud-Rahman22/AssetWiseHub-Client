@@ -23,8 +23,10 @@ const Login = () => {
                     timer: 1500
                 });
                 navigate(location?.state ? location.state : '/')
+
             })
             .catch((error) => {
+                console.log(error);
                 if (error.code === 'auth/invalid-login-credentials') {
                     Swal.fire({
                         position: "top-end",

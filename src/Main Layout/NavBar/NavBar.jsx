@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from '../../../public/logo/fagnqbmi.png'
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -16,7 +16,7 @@ const NavBar = ({info}) => {
         info?.role === 'admin' ? 
         <div>
         <li className="text-[#dbeeed]"><NavLink
-            to="/"
+            to="/admin-home"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
             }
@@ -92,12 +92,12 @@ const NavBar = ({info}) => {
         info?.role === 'employee' ? 
         <div>
         <li className="text-[#dbeeed]"><NavLink
-            to="/"
+            to="/admin-home"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
             }
         >
-            Home
+            Employee Home
         </NavLink></li>
         <li className="text-[#dbeeed]"><NavLink
             to="/myAssets"
@@ -197,9 +197,9 @@ const NavBar = ({info}) => {
                     </ul>
                 </div>
             </div>
-            <div className="navbar-center">
+            <Link to='/' className="navbar-center">
                 <img className="h-[50px] w-[50px]" src={info?.role === 'admin' ? info?.logo : Logo} alt="" />
-            </div>
+            </Link>
             <div className="navbar-end">
                 {
                     user &&

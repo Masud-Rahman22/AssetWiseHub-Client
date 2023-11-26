@@ -3,21 +3,30 @@ import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer/Footer";
 import UseAxiosSecure from "../Hooks/UseAxiosSecure";
 import useAuth from "../Hooks/useAuth";
-import { useEffect, useState } from "react";
+import { createContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-
+export const infoContext = createContext(null)
 const Main = () => {
     const axiosSecure = UseAxiosSecure();
-    const [info,setInfo] = useState();
-    const {user} = useAuth()
-    useEffect(()=>{
-        const getAuth = async()=>{
+    const {user,loading} = useAuth()
+    const {data: info={}, isLoading: infoLoading, error: infoError, refetch: infoRefetch} = useQuery({
+        queryKey: ['info', user],
+        enabled: (!loading && (!!user)),
+        queryFn: async()=>{
             const res = await axiosSecure.get(`/allUsers/${user?.email}`)
-            setInfo(res.data)
+            return res.data
         }
-        getAuth()
-    },[axiosSecure,user?.email])
+    })
+    const value = {
+        info,
+        role: info?.role,
+        infoLoading,
+        infoError,
+        infoRefetch
+    }
     return (
+        <infoContext.Provider value={value}>
         <div className="bg-[#1a3756]">
             <NavBar info={info}></NavBar>
             <div className="pt-20">
@@ -25,6 +34,7 @@ const Main = () => {
             </div>
             <Footer></Footer>
         </div>
+        </infoContext.Provider>
     );
 };
 

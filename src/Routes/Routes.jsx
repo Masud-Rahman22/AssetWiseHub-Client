@@ -8,6 +8,8 @@ import AdminForm from "../Pages/Admin Form/AdminForm";
 import Login from "../Pages/Login/Login";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ServicePage from "../Pages/ServicePage/ServicePage";
+import AdminHome from "../Main Layout/Dashboard_admin/Admin_Home/AdminHome";
+import AdminEmployeeHome from "../Main Layout/Dashboard_admin/AdminEmployeeHome";
 
 const router = createBrowserRouter([
     {
@@ -34,9 +36,12 @@ const router = createBrowserRouter([
             {
                 path: '/servicePage',
                 element: <ServicePage></ServicePage>
+            },
+            {
+                path: '/admin-home',
+                element: <AdminEmployeeHome></AdminEmployeeHome>
             }
-
-        ]
+        ]    
     },
 ]);
 
