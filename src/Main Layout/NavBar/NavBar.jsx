@@ -202,8 +202,13 @@ const NavBar = ({info}) => {
             </Link>
             <div className="navbar-end">
                 {
-                    user &&
+                    user && <div className="flex items-center gap-3">
+                        <p>{user?.displayName}</p>
+                        <div className="w-10 rounded-full navbar-end">
+                            <img className="rounded-full" src={user?.photoURL} />
+                        </div>
                     <button onClick={handleToLogout} className="btn bg-[#ec5349] md:mt-2 text-white border-none">Logout</button>
+                    </div>
                 }
             </div>
         </div>

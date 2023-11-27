@@ -4,6 +4,8 @@ import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import auth from "../../../Config/firebase.config";
 const EmployeeForm = () => {
     const {googleLogin,Register} = useContext(AuthContext)
     const axiosSecure = UseAxiosSecure();
@@ -11,19 +13,27 @@ const EmployeeForm = () => {
     const onSubmit = async (data) => {
         const EmployeeName = data.name
         const EmployeeEmail = data.email
+        const photoURL = data.photo
         const password = data.password
         const dob = data.dob
         const EmployeeData = {
             EmployeeName,
             EmployeeEmail,
+            photoURL,
             password,
             dob,
             role: 'employee'
         }
-        const userEmail = {email:EmployeeEmail}
+        const userEmail = {email:EmployeeEmail, role: 'employee'}
         Register(EmployeeEmail,password)
         .then(()=>{
-
+            updateProfile(auth.currentUser, {
+                displayName: EmployeeName, photoURL: photoURL
+            }).then(() => {
+                console.log('profile updated');
+            }).catch((error) => {
+                console.log(error);
+            });
         })
         .catch()
         console.log(EmployeeData);
@@ -76,6 +86,10 @@ const EmployeeForm = () => {
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="email" {...register('email')} id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                     <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+                </div>
+                <div className="relative z-0 w-full mb-6 group">
+                    <input type="text" {...register('photo')} id="photo" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Photo</label>
                 </div>
                 <div className="grid md:grid-cols-2 md:gap-6">
                     <div className="relative z-0 w-full mb-6 group">

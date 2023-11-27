@@ -8,8 +8,10 @@ import AdminForm from "../Pages/Admin Form/AdminForm";
 import Login from "../Pages/Login/Login";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ServicePage from "../Pages/ServicePage/ServicePage";
-import AdminHome from "../Main Layout/Dashboard_admin/Admin_Home/AdminHome";
 import AdminEmployeeHome from "../Main Layout/Dashboard_admin/AdminEmployeeHome";
+import AddAnAsset from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AddAnAsset";
+import AssetList from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetList";
+import AssetUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetUpdate";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +42,20 @@ const router = createBrowserRouter([
             {
                 path: '/admin-home',
                 element: <AdminEmployeeHome></AdminEmployeeHome>
+            },
+            // admin pages
+            {
+                path: '/addAnAsset',
+                element: <AddAnAsset></AddAnAsset>
+            },
+            {
+                path: '/assetList',
+                element: <AssetList></AssetList>
+            },
+            {
+                path: '/assetUpdate/:id',
+                element: <AssetUpdate></AssetUpdate>,
+                loader: ({params})=> fetch(`http://localhost:5000/assetUpdate/${params.id}`) 
             }
         ]    
     },
