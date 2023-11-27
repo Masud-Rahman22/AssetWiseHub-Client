@@ -53,7 +53,7 @@ const AssetList = () => {
                     <button className="btn text-white bg-[#ec5349] btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#ea271a] border-none mt-8">Quantity: High To Low</button>
                 </div>
                 <div className="">
-                    <h2 className="text-white text-2xl font-Roboto">Stock Status :</h2>
+                    <h2 className="text-white text-2xl font-Roboto">Product Status :</h2>
                     <select className="px-5 py-2" name="" id="">
                         <option value="available">returnable</option>
                         <option value="out of stock">non-returnable</option>
@@ -77,6 +77,7 @@ const AssetList = () => {
                             <th>Product Name</th>
                             <th>Product Type</th>
                             <th>Product Quantity</th>
+                            <th>Product Status</th>
                             <th>Date Added</th>
                             <th>Update</th>
                             <th>Delete</th>
@@ -89,6 +90,7 @@ const AssetList = () => {
                                 <td>{info.assetName}</td>
                                 <td>{info.assetType}</td>
                                 <td>{info.assetQuantity}</td>
+                                <td>{info.assetStatus}</td>
                                 <td>{info.date}</td>
                                 <td><Link to={`/assetUpdate/${info._id}`}><button className=""><GrUpdate className="text-2xl" /></button></Link></td>
                                 <td><button onClick={() => handleToDelete(info._id)}><MdDelete className="text-2xl" /> </button></td>

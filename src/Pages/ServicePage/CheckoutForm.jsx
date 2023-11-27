@@ -89,7 +89,23 @@ const CheckoutForm = () => {
             console.log('payment intent', paymentIntent);
             if (paymentIntent.status === 'succeeded') {
                 setTransactionId(paymentIntent.id)
-                
+                Swal.fire({
+                    title: "You successfully purchased the package",
+                    showClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                    `
+                    },
+                    hideClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                    `
+                    }
+                });
                 const adminLimit = axiosSecure.put(`/adminInfo`,{member:parseInt(Limit+initialLimit), email: user?.email})
                 console.log(adminLimit.data);
                 const paymentInfo = {

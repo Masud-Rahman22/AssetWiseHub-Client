@@ -12,6 +12,7 @@ import AdminEmployeeHome from "../Main Layout/Dashboard_admin/AdminEmployeeHome"
 import AddAnAsset from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AddAnAsset";
 import AssetList from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetList";
 import AssetUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetUpdate";
+import RequestForAnAsset from "../Main Layout/Dashboard_admin/EmployeeHome/RequestForAnAsset";
 
 const router = createBrowserRouter([
     {
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
                 path: '/assetUpdate/:id',
                 element: <AssetUpdate></AssetUpdate>,
                 loader: ({params})=> fetch(`http://localhost:5000/assetUpdate/${params.id}`) 
+            },
+            // Employee pages
+            {
+                path: '/requestForAnAsset',
+                element : <RequestForAnAsset></RequestForAnAsset>
             }
         ]    
     },

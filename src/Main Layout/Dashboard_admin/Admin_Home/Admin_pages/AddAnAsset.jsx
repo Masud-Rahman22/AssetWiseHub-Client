@@ -8,6 +8,7 @@ const AddAnAsset = () => {
         const name = data.name
         const type = data.type
         const quantity = data.quantity
+        const status = data.status
         // const date_time = new Date()
         // const date = date_time.toLocaleDateString()
         const date = data.da
@@ -15,6 +16,7 @@ const AddAnAsset = () => {
             assetName:name,
             assetType:type,
             assetQuantity: quantity,
+            assetStatus: status,
             date
         }
         const res = await axiosSecure.post('/assetsInfo', info)
@@ -53,6 +55,14 @@ const AddAnAsset = () => {
                         <option value='non-returnable'>Non-Returnable</option>
                     </select>
                     <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Type</label>
+                </div>
+                <div className="relative z-0 w-full mb-6 group">
+                <select className="block py-2.5 px-0 w-full text-sm border-0 border-b-2 appearance-none text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer bg-[#1a3756]" placeholder=" " required {...register('status')} id="type">
+                        <option value="default">Default</option>
+                        <option value="available">available</option>
+                        <option value='out of stock'>out of stock</option>
+                    </select>
+                    <label htmlFor="floating_repeat_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Status</label>
                 </div>
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="number" {...register('quantity')} id="quantity" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
