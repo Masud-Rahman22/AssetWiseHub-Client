@@ -13,6 +13,8 @@ import AddAnAsset from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/Ad
 import AssetList from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetList";
 import AssetUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AssetList/AssetUpdate";
 import RequestForAnAsset from "../Main Layout/Dashboard_admin/EmployeeHome/RequestForAnAsset";
+import MakeACustomRequest from "../Main Layout/Dashboard_admin/EmployeeHome/MakeACustomRequest";
+import AllRequests from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AllRequests";
 
 const router = createBrowserRouter([
     {
@@ -58,10 +60,18 @@ const router = createBrowserRouter([
                 element: <AssetUpdate></AssetUpdate>,
                 loader: ({params})=> fetch(`http://localhost:5000/assetUpdate/${params.id}`) 
             },
+            {
+                path: '/allRequests',
+                element: <AllRequests></AllRequests>
+            },
             // Employee pages
             {
                 path: '/requestForAnAsset',
                 element : <RequestForAnAsset></RequestForAnAsset>
+            },
+            {
+                path: '/makeACustomRequest',
+                element: <MakeACustomRequest></MakeACustomRequest>
             }
         ]    
     },

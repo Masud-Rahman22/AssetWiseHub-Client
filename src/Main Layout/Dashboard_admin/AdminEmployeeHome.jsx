@@ -15,7 +15,7 @@ const AdminEmployeeHome = () => {
         return <button onClick={infoRefetch}>Reload</button>
     }
     if(infoLoading || loading){
-        return <div>loading</div>
+        return <span className="loading loading-bars loading-lg"></span>
     }
     if(role === 'admin'){
         return <AdminHome></AdminHome>

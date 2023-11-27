@@ -4,16 +4,61 @@ import { GrUpdate } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { FaSearch } from "react-icons/fa";
+import { useRef, useState } from "react";
 const AssetList = () => {
     const axiosSecure = UseAxiosSecure();
+    const nameRef = useRef()
+    const [quantity,setQuantity] = useState(false);
+    const [name,setName] = useState('Quantity: High To Low')
+    const [array,setArray] = useState()
     const { data: infoOfAsset = [], refetch } = useQuery({
         queryKey: ['infoOfAsset'],
         queryFn: async () => {
             const res = await axiosSecure.get('/assetsInfo')
+            setArray(res.data)
             return res.data
         }
     })
     // console.log(infoOfAsset);
+    console.log(array);
+    const handleSearch = (e)=>{
+        e.preventDefault()
+        const value = nameRef.current.value
+        const search = infoOfAsset?.filter(element=> element.assetName.toLowerCase().includes(value.toLowerCase()))
+        console.log(search);
+        setArray(search)
+    }
+    const handleStatus = (e)=>{
+        e.preventDefault()
+        const value = e.target.value
+        console.log(value);
+        const typeFilter = infoOfAsset?.filter(element=> element.assetType == value)
+        console.log(typeFilter);
+        setArray(typeFilter)
+    }
+    const handleType = e =>{
+        e.preventDefault()
+        const value = e.target.value
+        console.log(value);
+        const statusFilter = infoOfAsset?.filter(element=> element.assetStatus == value)
+        console.log(statusFilter);
+        setArray(statusFilter)
+    }
+    const handleSort = () =>{
+        setQuantity(!quantity)
+        if(quantity==false){
+            setName('Quantity: High To Low')
+            const sort = infoOfAsset.sort((a,b)=>a.assetQuantity - b.assetQuantity)
+            setArray(sort)
+        }
+        else{
+            setName('Quantity: Low To High')
+            const sort = infoOfAsset.sort((a,b)=>b.assetQuantity - a.assetQuantity)
+            setArray(sort)
+        }
+    }
+    console.log(quantity);
     const handleToDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -40,6 +85,7 @@ const AssetList = () => {
             }
         });
     }
+    
     return (
         <div className="h-[70vh]">
             <div className="flex justify-between items-center">
@@ -47,21 +93,24 @@ const AssetList = () => {
                     <label className="label">
                         <span className="label-text text-white text-2xl">Search here</span>
                     </label>
-                    <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                    <input  ref={nameRef} type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs relative" />
+                    <button onClick={handleSearch}><FaSearch className="text-black text-xl absolute md:-mt-8 md:ml-72"/></button>
                 </div>
                 <div>
-                    <button className="btn text-white bg-[#ec5349] btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#ea271a] border-none mt-8">Quantity: High To Low</button>
+                    <button onClick={()=>handleSort()} className="btn text-white bg-[#ec5349] btn-xs sm:btn-sm md:btn-md lg:btn-lg hover:bg-[#ea271a] border-none mt-8">{name}</button>
                 </div>
                 <div className="">
                     <h2 className="text-white text-2xl font-Roboto">Product Status :</h2>
-                    <select className="px-5 py-2" name="" id="">
-                        <option value="available">returnable</option>
-                        <option value="out of stock">non-returnable</option>
+                    <select onChange={handleStatus} className="px-5 py-2" name="status" id="select1">
+                        <option value="default">default</option>
+                        <option value="returnable">returnable</option>
+                        <option value="non-returnable">non-returnable</option>
                     </select>
                 </div>
                 <div className="md:mr-10">
                     <h2 className="text-white text-2xl font-Roboto">Asset Type :</h2>
-                    <select className="px-5 py-2" name="" id="">
+                    <select onChange={handleType} className="px-5 py-2" name="" id="select2">
+                        <option value="default">default</option>
                         <option value="available">available</option>
                         <option value="out of stock">out of stock</option>
                     </select>
@@ -85,7 +134,7 @@ const AssetList = () => {
                     </thead>
                     <tbody>
                         {
-                            infoOfAsset?.map((info, i) => <tr key={info._id}>
+                            array?.map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetType}</td>

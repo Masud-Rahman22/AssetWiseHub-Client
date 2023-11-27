@@ -33,11 +33,7 @@ const Banner = () => {
                             </p>
                             <p className='text-[#dbeeed] text-4xl font-Roboto'><span className='text-[#ec5349]'>Invest Smart</span>.Grow Wealth</p>
                             <Link to='/employeeForm'>
-                                <motion.button whileHover={{
-                                    scale: 1.2,
-                                    transition: { duration: 1 },
-                                }}
-                                    whileTap={{ scale: 0.9 }} className='btn bg-[#ec5349] rounded-lg border-none text-[#dbeeed] hover:bg-[#f71404]'>JOIN AS AN Employee</motion.button>
+                                <button className='btn'>employee</button>
                             </Link>
                         </div>
                         <img src={slider1} alt="Slide 1 Image" />
