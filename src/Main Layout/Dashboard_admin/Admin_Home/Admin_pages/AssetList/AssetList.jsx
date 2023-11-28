@@ -87,7 +87,7 @@ const AssetList = () => {
     }
     
     return (
-        <div className="h-[70vh]">
+        <div className="h-fit">
             <div className="flex justify-between items-center">
                 <div className="form-control w-full max-w-xs md:m-10">
                     <label className="label">

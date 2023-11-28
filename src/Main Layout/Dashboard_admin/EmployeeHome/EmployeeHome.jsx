@@ -12,50 +12,177 @@ const EmployeeHome = () => {
         }
     })
     console.log(allRequests);
+    const pendingRequests = allRequests?.filter(request => request.
+        requestStatus == 'pending')
+    console.log(pendingRequests);
     return (
-        <div className="h-[100vh]">
+        <div className="h-fit">
             <div>
-                <h1 className="text-4xl text-white border-2 text-center w-48">My Custom Lists</h1>
+                <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My Custom Lists</h1>
             </div>
             <div>
-            {
-                allRequests.length === 0 ? <div></div>
-                    :
-                    <div className="overflow-x-auto text-white">
-                        <table className="table">
-                            {/* head */}
-                            <thead className="text-white">
-                                <tr>
-                                    <th>serial</th>
-                                    <th>Asset Name</th>
-                                    <th>Asset Type</th>
-                                    <th>Email of Requester</th>
-                                    <th>Name of Requester</th>
-                                    <th>Request Date</th>
-                                    <th>Additional Note</th>
-                                    <th>Status</th>
-                                    <th>Approve</th>
-                                    <th>Reject</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    allRequests?.map((info, i) => <tr key={info._id}>
-                                        <th>{i + 1}</th>
-                                        <td>{info.assetName}</td>
-                                        <td>{info.assetPrice}</td>
-                                        <td>{info.email}</td>
-                                        <td>{info.name}</td>
-                                        <td>{info.requestDate}</td>
-                                        <td>{info.whyNeed}</td>
-                                        <td>{info.requestStatus}</td>
-                                    </tr>)
-                                }
+                {
+                    allRequests.length === 0 ? <div></div>
+                        :
+                        <div className="overflow-x-auto text-white">
+                            <table className="table">
+                                {/* head */}
+                                <thead className="text-white">
+                                    <tr>
+                                        <th>serial</th>
+                                        <th>Asset Name</th>
+                                        <th>Asset Price</th>
+                                        <th>Asset Type</th>
+                                        <th>Status</th>
+                                        <th>View Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        allRequests?.map((info, i) => <tr key={info._id}>
+                                            <th>{i + 1}</th>
+                                            <td>{info.assetName}</td>
+                                            <td>{info.assetPrice}</td>
+                                            <td>{info.assetType}</td>
+                                            <td>{info.requestStatus}</td>
+                                            <td>{
+                                                <div>
+                                                    <button className="btn" onClick={() => document.getElementById('my_modal_5').showModal()}>View Details</button>
+                                                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                                    <div className="modal-box">
+                                                        {/* card */}
+                                                        <div className="card bg-base-100 shadow-xl">
+                                                            <figure><img src={info.assetImage} alt="Shoes" /></figure>
+                                                            <div className="card-body text-black">
+                                                                <h2 className="card-title">{info.assetName}</h2>
+                                                                <h2 className="text-xl text-[#ec5349]">${info.assetPrice}</h2>
+                                                                <h2 className="text-xl text-[#ec5349]">{info.assetType}</h2>
+                                                                <div>
+                                                                    <h2 className="text-xl text-[#ec5349]  text-center">Why Needed</h2>
+                                                                <p>{info.whyNeed}</p>
+                                                                </div>
+                                                                <div>
+                                                                <h2 className="text-xl text-[#ec5349]  text-center">Additional Information</h2>
+                                                                <p>{info.info}</p>
+                                                                </div>
+                                                                <p className="text-[#ec5349]">Request Date : {info.requestDate}</p>
+                                                                <p className="text-[#ec5349]">Request Status : {info.requestStatus}</p>
+                                                                <div className="card-actions justify-end">
+                                                                    <button className="btn btn-primary">Update</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/* end */}
+                                                        <div className="modal-action">
+                                                            <form method="dialog">
+                                                                {/* if there is a button in form, it will close the modal */}
+                                                                <button className="btn">Close</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </dialog>
+                                                </div>
+                                                }
+                                                </td>
+                                        </tr>)
+                                    }
 
-                            </tbody>
-                        </table>
-                    </div>
-            }
+                                </tbody>
+                            </table>
+                        </div>
+                }
+            </div>
+            <div>
+                <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My Pending Requests</h1>
+            </div>
+            <div className="overflow-x-auto text-white">
+                <table className="table">
+                    {/* head */}
+                    <thead className="text-white">
+                        <tr>
+                        <th>serial</th>
+                        <th>Asset Name</th>
+                        <th>Asset Price</th>
+                        <th>Asset Type</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            pendingRequests?.map((info, i) => <tr key={info._id}>
+                                <th>{i + 1}</th>
+                                <td>{info.assetName}</td>
+                                <td>{info.assetPrice}</td>
+                                <td>{info.assetType}</td>
+                                <td>{info.requestStatus}</td>
+                                
+                            </tr>)
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My monthly Requests</h1>
+            </div>
+            <div className="overflow-x-auto text-white">
+                <table className="table">
+                    {/* head */}
+                    <thead className="text-white">
+                        <tr>
+                        <th>serial</th>
+                        <th>Asset Name</th>
+                        <th>Asset Price</th>
+                        <th>Asset Type</th>
+                        <th>Status</th>
+                        <th>date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            allRequests?.map((info, i) => <tr key={info._id}>
+                                <th>{i + 1}</th>
+                                <td>{info.assetName}</td>
+                                <td>{info.assetPrice}</td>
+                                <td>{info.assetType}</td>
+                                <td>{info.requestStatus}</td>
+                                <td>{info.requestDate}</td>
+                            </tr>)
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My Frequently Requests</h1>
+            </div>
+            <div className="overflow-x-auto text-white">
+                <table className="table">
+                    {/* head */}
+                    <thead className="text-white">
+                        <tr>
+                        <th>serial</th>
+                        <th>Asset Name</th>
+                        <th>Asset Price</th>
+                        <th>Asset Type</th>
+                        <th>Status</th>
+                        <th>date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            allRequests?.slice(0,4).map((info, i) => <tr key={info._id}>
+                                <th>{i + 1}</th>
+                                <td>{info.assetName}</td>
+                                <td>{info.assetPrice}</td>
+                                <td>{info.assetType}</td>
+                                <td>{info.requestStatus}</td>
+                                <td>{info.requestDate}</td>
+                            </tr>)
+                        }
+
+                    </tbody>
+                </table>
             </div>
         </div>
     );

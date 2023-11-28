@@ -15,6 +15,13 @@ import AssetUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/A
 import RequestForAnAsset from "../Main Layout/Dashboard_admin/EmployeeHome/RequestForAnAsset";
 import MakeACustomRequest from "../Main Layout/Dashboard_admin/EmployeeHome/MakeACustomRequest";
 import AllRequests from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AllRequests";
+import MyAssets from "../Main Layout/Dashboard_admin/EmployeeHome/MyAssets";
+import AdminProfile from "../Main Layout/Dashboard_admin/Admin_Home/AdminProfile";
+import EmployeeProfile from "../Main Layout/Dashboard_admin/EmployeeHome/EmployeeProfile";
+import EmployeeProfileUpdate from "../Main Layout/Dashboard_admin/EmployeeHome/EmployeeProfileUpdate";
+import AdminProfileUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AdminProfileUpdate";
+import CustomRequestsLists from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/CustomRequestsLists";
+import AddAnEmployee from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AddAnEmployee/AddAnEmployee";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +71,22 @@ const router = createBrowserRouter([
                 path: '/allRequests',
                 element: <AllRequests></AllRequests>
             },
+            {
+                path: '/adminProfile',
+                element: <AdminProfile></AdminProfile>
+            },
+            {
+                path: '/adminProfileUpdate',
+                element: <AdminProfileUpdate></AdminProfileUpdate>
+            },
+            {
+                path: '/customRequestsLists',
+                element: <CustomRequestsLists></CustomRequestsLists>
+            },
+            {
+                path: '/addAnEmployee',
+                element: <AddAnEmployee></AddAnEmployee>
+            },
             // Employee pages
             {
                 path: '/requestForAnAsset',
@@ -72,6 +95,18 @@ const router = createBrowserRouter([
             {
                 path: '/makeACustomRequest',
                 element: <MakeACustomRequest></MakeACustomRequest>
+            },
+            {
+                path: '/myAssets',
+                element: <MyAssets></MyAssets>
+            },
+            {
+                path: '/employeeProfile',
+                element: <EmployeeProfile></EmployeeProfile>
+            },
+            {
+                path: '/employeeProfileUpdate',
+                element: <EmployeeProfileUpdate></EmployeeProfileUpdate>
             }
         ]    
     },
