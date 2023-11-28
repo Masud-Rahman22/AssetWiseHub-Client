@@ -9,16 +9,20 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { EffectFade, Navigation, Pagination } from 'swiper/modules';
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 const Banner = () => {
+    const navigate = useNavigate()
+    const handleEmployee = ()=>{
+        navigate('/employeeForm')
+    }
     return (
         <div>
             <Swiper
                 spaceBetween={30}
                 effect={'fade'}
                 loop={true}
-                autoplay={{ delay: 3000 }}
                 navigation={true}
+                slidesPerView={1}
                 pagination={{
                     clickable: true,
                 }}
@@ -32,9 +36,13 @@ const Banner = () => {
                             <p className='text-[#dbeeed] text-xl md:w-1/2 text-center font-Roboto'>Discover tailored asset management solutions to optimize your investments. Our team at <span className='text-[#ec5349] font-Roboto'>[AssetWiseHub]</span> specializes in personalized strategies for individuals and businesses. From investment advisory to comprehensive portfolio analysis and risk assessment, we prioritize your financial goals. Transparency and integrity define our approach, empowering clients with knowledge for informed decision-making. Our commitment is to guide you through the intricacies of the financial landscape.
                             </p>
                             <p className='text-[#dbeeed] text-4xl font-Roboto'><span className='text-[#ec5349]'>Invest Smart</span>.Grow Wealth</p>
-                            <Link to='/employeeForm'>
-                                <button className='btn'>employee</button>
-                            </Link>
+                            <NavLink to='/employeeForm'>
+                            <motion.button onClick={handleEmployee} whileHover={{
+                                    scale: 1.2,
+                                    transition: { duration: 1 },
+                                }}
+                                    whileTap={{ scale: 0.9 }} className='btn bg-[#ec5349] rounded-lg border-none text-[#dbeeed] hover:bg-[#f71404]'>JOIN AS AN Employee</motion.button>
+                            </NavLink>
                         </div>
                         <img src={slider1} alt="Slide 1 Image" />
                     </div>
@@ -46,13 +54,13 @@ const Banner = () => {
                             <p className='text-[#dbeeed] text-xl md:w-1/2 text-center font-Roboto'>Discover tailored asset management solutions to optimize your investments. Our team at <span className='text-[#ec5349] font-Roboto'>[AssetWiseHub]</span> specializes in personalized strategies for individuals and businesses. From investment advisory to comprehensive portfolio analysis and risk assessment, we prioritize your financial goals. Transparency and integrity define our approach, empowering clients with knowledge for informed decision-making. Our commitment is to guide you through the intricacies of the financial landscape.
                             </p>
                             <p className='text-[#dbeeed] text-4xl font-Roboto'><span className='text-[#ec5349]'>Invest Smart</span>.Grow Wealth</p>
-                            <Link to='/adminForm'>
+                            <NavLink to='/employeeForm'>
                                 <motion.button whileHover={{
                                     scale: 1.2,
                                     transition: { duration: 1 },
                                 }}
                                     whileTap={{ scale: 0.9 }} className='btn bg-[#ec5349] rounded-lg border-none text-[#dbeeed] hover:bg-[#f71404]'>JOIN AS AN HR/Admin</motion.button>
-                            </Link>
+                            </NavLink>
                         </div>
                         <img src={slider2} />
                     </div>

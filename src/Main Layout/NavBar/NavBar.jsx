@@ -173,14 +173,23 @@ const NavBar = ({info}) => {
         >
             Join as HR/Admin
         </NavLink></li>
-        {user ? '' : <li className="text-[#dbeeed]"><NavLink
+        {user ? '' : <div>
+        <li className="text-[#dbeeed]"><NavLink
             to="/login"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
             }
         >
             Login
-        </NavLink></li>}
+        </NavLink></li>
+        <li className="text-[#dbeeed]"><NavLink
+            to="/signUp"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "font-bold bg-[#ec5349]" : ""
+            }
+        >
+            Sign Up
+        </NavLink></li></div>}
         </div>
     }
     

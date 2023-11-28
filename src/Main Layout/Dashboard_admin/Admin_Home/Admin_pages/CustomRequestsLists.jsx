@@ -2,8 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../../Hooks/UseAxiosSecure";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const CustomRequestsLists = () => {
+    const [perPageItem,setPerPageItem] = useState(10)
+    const [start,setStart] = useState(0)
+    const [end,setEnd] = useState(perPageItem)
     const axiosSecure = UseAxiosSecure()
     const { data: allRequests = [],refetch } = useQuery({
         queryKey: ['allRequests'],
@@ -13,6 +18,15 @@ const CustomRequestsLists = () => {
         }
     })
     console.log(allRequests);
+    const totalLength = allRequests.length
+    console.log(totalLength);
+    const button = Math.ceil(totalLength / perPageItem)
+    const totalButton = [...Array(button).keys()]
+    console.log(totalButton);
+    const handleButton = (i)=>{
+        setStart(i*perPageItem)
+        setEnd(i*perPageItem + perPageItem)
+    }
     const handleApprove = async(id) =>{
         const approvedReq = await axiosSecure.patch(`/customRequest/${id}`)
         if(approvedReq.data.modifiedCount > 0){
@@ -52,6 +66,9 @@ const CustomRequestsLists = () => {
     }
     return (
         <div className="h-fit">
+            <Helmet>
+                <title>AssetWise | Custom Request Lists</title>
+            </Helmet>
             <div className="overflow-x-auto  text-white">
                 <table className="table">
                     {/* head */}
@@ -72,7 +89,7 @@ const CustomRequestsLists = () => {
                     </thead>
                     <tbody>
                         {
-                            allRequests?.map((info,i) => <tr key={info._id}>
+                            allRequests?.slice(start,end).map((info,i) => <tr key={info._id}>
                                 <th>
                                     {i+1}
                                 </th>
@@ -101,6 +118,13 @@ const CustomRequestsLists = () => {
                     
 
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
         </div>
     );

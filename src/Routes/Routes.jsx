@@ -22,6 +22,11 @@ import EmployeeProfileUpdate from "../Main Layout/Dashboard_admin/EmployeeHome/E
 import AdminProfileUpdate from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AdminProfileUpdate";
 import CustomRequestsLists from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/CustomRequestsLists";
 import AddAnEmployee from "../Main Layout/Dashboard_admin/Admin_Home/Admin_pages/AddAnEmployee/AddAnEmployee";
+import SignUp from "../Pages/SignUp/SignUp";
+import Payment from "../Shared/Payment";
+import PaymentPage from "../Component/PaymentPage";
+import MyEmployeeList from "../Main Layout/Dashboard_admin/Admin_Home/MyEmployeeList";
+import MyTeam from "../Main Layout/Dashboard_admin/EmployeeHome/MyTeam";
 
 const router = createBrowserRouter([
     {
@@ -46,12 +51,26 @@ const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
+                path: '/signUp',
+                element : <SignUp></SignUp>
+            },
+            {
                 path: '/servicePage',
                 element: <ServicePage></ServicePage>
             },
             {
                 path: '/admin-home',
                 element: <AdminEmployeeHome></AdminEmployeeHome>
+            },
+            {
+                path: '/payment',
+                element: <Payment></Payment>,
+                loader: ()=> fetch('http://localhost:5000/packages')
+            },
+            {
+                path: '/paymentPage/:_id',
+                element: <PaymentPage></PaymentPage>,
+                loader: ({params})=> fetch(`http://localhost:5000/packages/${params._id}`)
             },
             // admin pages
             {
@@ -87,6 +106,10 @@ const router = createBrowserRouter([
                 path: '/addAnEmployee',
                 element: <AddAnEmployee></AddAnEmployee>
             },
+            {
+                path: '/myEmployeeList',
+                element: <MyEmployeeList></MyEmployeeList>
+            },
             // Employee pages
             {
                 path: '/requestForAnAsset',
@@ -107,6 +130,10 @@ const router = createBrowserRouter([
             {
                 path: '/employeeProfileUpdate',
                 element: <EmployeeProfileUpdate></EmployeeProfileUpdate>
+            },
+            {
+                path: '/myTeam',
+                element: <MyTeam></MyTeam>
             }
         ]    
     },

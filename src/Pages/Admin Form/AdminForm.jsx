@@ -6,6 +6,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import auth from "../../../Config/firebase.config";
+import { Helmet } from "react-helmet-async";
 
 const AdminForm = () => {
     const axiosSecure = UseAxiosSecure();
@@ -78,6 +79,9 @@ const AdminForm = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>AssetWise | Join As Admin</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="w-3/5 md:w-4/5 mx-auto mt-16 h-[50vh] mb-20">
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="text" {...register('name')} id="name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />

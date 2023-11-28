@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const EmployeeHome = () => {
     const axiosSecure = UseAxiosSecure()
+    const [perPageItem,setPerPageItem] = useState(6)
+    const [start,setStart] = useState(0)
+    const [end,setEnd] = useState(perPageItem)
     const { data: allRequests = [] } = useQuery({
         queryKey: ['allRequests'],
         queryFn: async () => {
@@ -12,11 +17,23 @@ const EmployeeHome = () => {
         }
     })
     console.log(allRequests);
+    const totalLength = allRequests.length
+    console.log(totalLength);
+    const button = Math.ceil(totalLength / perPageItem)
+    const totalButton = [...Array(button).keys()]
+    console.log(totalButton);
+    const handleButton = (i)=>{
+        setStart(i*perPageItem)
+        setEnd(i*perPageItem + perPageItem)
+    }
     const pendingRequests = allRequests?.filter(request => request.
         requestStatus == 'pending')
     console.log(pendingRequests);
     return (
         <div className="h-fit">
+            <Helmet>
+                <title>AssetWise | Employee Home</title>
+            </Helmet>
             <div>
                 <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My Custom Lists</h1>
             </div>
@@ -39,7 +56,7 @@ const EmployeeHome = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        allRequests?.map((info, i) => <tr key={info._id}>
+                                        allRequests?.slice(start,end).map((info, i) => <tr key={info._id}>
                                             <th>{i + 1}</th>
                                             <td>{info.assetName}</td>
                                             <td>{info.assetPrice}</td>
@@ -88,6 +105,13 @@ const EmployeeHome = () => {
                                     }
 
                                 </tbody>
+                                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
                             </table>
                         </div>
                 }
@@ -109,7 +133,7 @@ const EmployeeHome = () => {
                     </thead>
                     <tbody>
                         {
-                            pendingRequests?.map((info, i) => <tr key={info._id}>
+                            pendingRequests?.slice(start,end).map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetPrice}</td>
@@ -121,6 +145,13 @@ const EmployeeHome = () => {
 
                     </tbody>
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
             <div>
                 <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My monthly Requests</h1>
@@ -140,7 +171,7 @@ const EmployeeHome = () => {
                     </thead>
                     <tbody>
                         {
-                            allRequests?.map((info, i) => <tr key={info._id}>
+                            allRequests?.slice(start,end).map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetPrice}</td>
@@ -152,6 +183,13 @@ const EmployeeHome = () => {
 
                     </tbody>
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
             <div>
                 <h1 className="text-4xl text-white border-2 text-center md:w-96 mx-auto py-4 my-10">My Frequently Requests</h1>

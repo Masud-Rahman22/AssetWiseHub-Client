@@ -4,10 +4,14 @@ import { FaSearch } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const AllRequests = () => {
     const axiosSecure = UseAxiosSecure()
     const nameRef = useRef()
     const [array,setArray] = useState()
+    const [perPageItem,setPerPageItem] = useState(10)
+    const [start,setStart] = useState(0)
+    const [end,setEnd] = useState(perPageItem)
     const {data: allRequests=[],refetch} = useQuery({
         queryKey: ['allRequests'],
         queryFn: async()=>{
@@ -16,17 +20,11 @@ const AllRequests = () => {
             return res.data
         }
     })
-    // const { data: infoOfAsset = [] } = useQuery({
-    //     queryKey: ['infoOfAsset'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get('/assetsInfo')
-    //         return res.data
-    //     }
-    // })
-    // console.log(allRequests);
-    // console.log(infoOfAsset);
-    // const name_type = infoOfAsset?.map(information => information.assetName)
-    // console.log(name_type);
+    const totalLength = allRequests.length
+    console.log(totalLength);
+    const button = Math.ceil(totalLength / perPageItem)
+    const totalButton = [...Array(button).keys()]
+    console.log(totalButton);
     const handleSearch = (e)=>{
         e.preventDefault()
         const value = nameRef.current.value
@@ -71,8 +69,15 @@ const AllRequests = () => {
             }
         });
     }
+    const handleButton = (i)=>{
+        setStart(i*perPageItem)
+        setEnd(i*perPageItem + perPageItem)
+    }
     return (
         <div className="h-fit">
+            <Helmet>
+                <title>AssetWise | All Requests</title>
+            </Helmet>
             <div className="form-control w-full max-w-xs md:m-10">
                     <label className="label">
                         <span className="label-text text-white text-2xl">Search here</span>
@@ -99,7 +104,7 @@ const AllRequests = () => {
                     </thead>
                     <tbody>
                         {
-                            array?.map((info, i) => <tr key={info._id}>
+                            array?.slice(start,end).map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetPrice}</td>
@@ -114,7 +119,15 @@ const AllRequests = () => {
                         }
 
                     </tbody>
+                        
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
         </div>
     );

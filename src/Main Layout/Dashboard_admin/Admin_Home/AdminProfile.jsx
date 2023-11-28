@@ -3,6 +3,7 @@ import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const AdminProfile = () => {
@@ -18,6 +19,9 @@ const AdminProfile = () => {
     console.log(adminInfo);
     return (
         <div className="h-fit flex items-center justify-center">
+            <Helmet>
+                <title>AssetWise | Admin Profile</title>
+            </Helmet>
             <div className="relative flex flex-col  bg-[#1a3756] shadow-md w-96 rounded-xl bg-clip-border text-white">
                 <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 md:h-80 flex items-center justify-center rounded-xl bg-clip-border">
                     <img className="rounded-full md:w-60" src={adminInfo?.photoURL} alt="profile-picture" />

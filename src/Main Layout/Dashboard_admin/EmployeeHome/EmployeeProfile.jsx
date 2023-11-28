@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { useEffect } from "react";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const EmployeeProfile = () => {
@@ -18,6 +19,9 @@ const EmployeeProfile = () => {
     console.log(employeeInfo);
     return (
         <div className="h-fit flex items-center justify-center">
+            <Helmet>
+                <title>AssetWise | Employee Profile</title>
+            </Helmet>
             <div className="relative flex flex-col  bg-[#1a3756] shadow-md w-96 rounded-xl bg-clip-border text-white">
                 <div className="relative mx-4 mt-4 overflow-hidden text-gray-700  h-80 flex items-center justify-center rounded-xl bg-clip-border">
                     <img className="rounded-full" src={employeeInfo?.photoURL} alt="profile-picture" />

@@ -6,8 +6,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../../../Config/firebase.config";
+import { Helmet } from "react-helmet-async";
 const EmployeeForm = () => {
-    const {googleLogin,Register} = useContext(AuthContext)
+    const { googleLogin, Register } = useContext(AuthContext)
     const axiosSecure = UseAxiosSecure();
     const { register, handleSubmit, reset } = useForm()
     const onSubmit = async (data) => {
@@ -24,21 +25,21 @@ const EmployeeForm = () => {
             dob,
             role: 'employee'
         }
-        const userEmail = {email:EmployeeEmail, role: 'employee'}
-        Register(EmployeeEmail,password)
-        .then(()=>{
-            updateProfile(auth.currentUser, {
-                displayName: EmployeeName, photoURL: photoURL
-            }).then(() => {
-                console.log('profile updated');
-            }).catch((error) => {
-                console.log(error);
-            });
-        })
-        .catch()
+        const userEmail = { email: EmployeeEmail, role: 'employee' }
+        Register(EmployeeEmail, password)
+            .then(() => {
+                updateProfile(auth.currentUser, {
+                    displayName: EmployeeName, photoURL: photoURL
+                }).then(() => {
+                    console.log('profile updated');
+                }).catch((error) => {
+                    console.log(error);
+                });
+            })
+            .catch()
         console.log(EmployeeData);
         const res = await axiosSecure.post('/employeesInfo', EmployeeData)
-        const allUsers = await axiosSecure.post('/allUsers',userEmail)
+        const allUsers = await axiosSecure.post('/allUsers', userEmail)
         console.log(allUsers.data);
         if (res.data.insertedId) {
             reset()
@@ -78,6 +79,9 @@ const EmployeeForm = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>AssetWise | Join As Employee</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="w-3/5 md:w-4/5 mx-auto mt-16 h-[50vh] mb-20">
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="text" {...register('name')} id="name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />

@@ -3,9 +3,13 @@ import { FaSearch } from "react-icons/fa";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyAssets = () => {
     const axiosSecure = UseAxiosSecure()
+    const [perPageItem,setPerPageItem] = useState(10)
+    const [start,setStart] = useState(0)
+    const [end,setEnd] = useState(perPageItem)
     const nameRef = useRef()
     const [array,setArray] = useState()
     const {data: allRequests=[],refetch} = useQuery({
@@ -17,6 +21,15 @@ const MyAssets = () => {
         }
     })
     console.log(allRequests);
+    const totalLength = allRequests.length
+    console.log(totalLength);
+    const button = Math.ceil(totalLength / perPageItem)
+    const totalButton = [...Array(button).keys()]
+    console.log(totalButton);
+    const handleButton = (i)=>{
+        setStart(i*perPageItem)
+        setEnd(i*perPageItem + perPageItem)
+    }
     const handleStatus = (e)=>{
         e.preventDefault()
         const value = e.target.value
@@ -79,6 +92,9 @@ const MyAssets = () => {
     }
     return (
         <div className="h-fit">
+            <Helmet>
+                <title>AssetWise | My Assets</title>
+            </Helmet>
             <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="form-control w-full max-w-xs md:m-10">
                     <label className="label">
@@ -121,7 +137,7 @@ const MyAssets = () => {
                     </thead>
                     <tbody>
                         {
-                            array?.map((info, i) => <tr key={info._id}>
+                            array?.slice(start,end).map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetType}</td>
@@ -135,6 +151,13 @@ const MyAssets = () => {
 
                     </tbody>
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
         </div>
     );

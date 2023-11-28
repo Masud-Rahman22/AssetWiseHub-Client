@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
-import UseAxiosSecure from "../../../../../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 
-const AddAnEmployee = () => {
+const MyEmployeeList = () => {
     const axiosSecure = UseAxiosSecure()
     const [perPageItem,setPerPageItem] = useState(3)
     const [start,setStart] = useState(0)
     const [end,setEnd] = useState(perPageItem)
-    const {data: users=[]} = useQuery({
+    const {data: users=[],refetch} = useQuery({
         queryKey: ['allRequests'],
         queryFn: async()=>{
             const res = await axiosSecure.get('/user')
@@ -28,45 +27,41 @@ const AddAnEmployee = () => {
         setStart(i*perPageItem)
         setEnd(i*perPageItem + perPageItem)
     }
-    const handleAddTeam = (info)=>{
-        console.log(info);
-        // const userInfo = {
-        //     info.
-        // }
-        axiosSecure.post('/team',info)
-        .then(res =>{
-            if(res.data.insertedId){
-                Swal.fire({
-                    title: "Added to the team",
-                    showClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                    `
-                    },
-                    hideClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                    `
-                    }
-                });
+    const handleRemove = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/user/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Removed from the team.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
             }
-        })
+        });
     }
     return (
         <div className="h-fit">
             <Helmet>
-                <title>AssetWise | Add An Employee</title>
+                <title>AssetWise | My Employee Lists</title>
             </Helmet>
-            <div className="text-center my-10">
-                <Link to='/payment'><button className="btn bg-[#ec5349] btn-lg border-none text-white">Hey There, Buy a package</button></Link>
-            </div>
             <div>
-                <h1 className="border-2 text-4xl shadow-md p-2 md:w-2/5 text-center text-[#dbeeed] mx-auto">Users Who are not an employee</h1>
-                <div className="overflow-x-auto text-white">
+            <h1 className="border-2 text-4xl shadow-md p-2 md:w-2/5 text-center text-[#dbeeed] mx-auto my-10">My Employee List</h1>
+            </div>
+            <div className="overflow-x-auto text-white">
                 <table className="table">
                     {/* head */}
                     <thead className="text-white">
@@ -74,7 +69,7 @@ const AddAnEmployee = () => {
                             <th>serial</th>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>Add te the team</th>                           
+                            <th>Remove the team</th>                           
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +78,7 @@ const AddAnEmployee = () => {
                                 <th>{i + 1}</th>
                                 <td>{info.name}</td>
                                 <td><img className="w-[40px] h[40px]" src={info.photo} alt="" /></td>
-                                <td><button onClick={()=>handleAddTeam(info)} className="btn">Add to team</button></td>
+                                <td><button onClick={()=>handleRemove(info._id)} className="btn">Remove From the team</button></td>
                             </tr>)
                         }
 
@@ -97,9 +92,9 @@ const AddAnEmployee = () => {
                         }
                         </div>
             </div>
-            </div>
+            
         </div>
     );
 };
 
-export default AddAnEmployee;
+export default MyEmployeeList;

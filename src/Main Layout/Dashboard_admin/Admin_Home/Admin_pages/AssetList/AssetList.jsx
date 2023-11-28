@@ -6,8 +6,12 @@ import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import { FaSearch } from "react-icons/fa";
 import { useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 const AssetList = () => {
     const axiosSecure = UseAxiosSecure();
+    const [perPageItem,setPerPageItem] = useState(3)
+    const [start,setStart] = useState(0)
+    const [end,setEnd] = useState(perPageItem)
     const nameRef = useRef()
     const [quantity,setQuantity] = useState(false);
     const [name,setName] = useState('Quantity: High To Low')
@@ -20,6 +24,15 @@ const AssetList = () => {
             return res.data
         }
     })
+    const totalLength = infoOfAsset.length
+    console.log(totalLength);
+    const button = Math.ceil(totalLength / perPageItem)
+    const totalButton = [...Array(button).keys()]
+    console.log(totalButton);
+    const handleButton = (i)=>{
+        setStart(i*perPageItem)
+        setEnd(i*perPageItem + perPageItem)
+    }
     // console.log(infoOfAsset);
     console.log(array);
     const handleSearch = (e)=>{
@@ -88,6 +101,9 @@ const AssetList = () => {
     
     return (
         <div className="h-fit">
+            <Helmet>
+                <title>AssetWise | Asset List</title>
+            </Helmet>
             <div className="flex justify-between items-center">
                 <div className="form-control w-full max-w-xs md:m-10">
                     <label className="label">
@@ -134,7 +150,7 @@ const AssetList = () => {
                     </thead>
                     <tbody>
                         {
-                            array?.map((info, i) => <tr key={info._id}>
+                            array?.slice(start,end).map((info, i) => <tr key={info._id}>
                                 <th>{i + 1}</th>
                                 <td>{info.assetName}</td>
                                 <td>{info.assetType}</td>
@@ -148,6 +164,13 @@ const AssetList = () => {
 
                     </tbody>
                 </table>
+                <div className="flex items-center justify-center gap-10 border-2 p-3 my-10">
+                        {
+                            totalButton.map((idx,i)=> <button onClick={()=>handleButton(i)} className="btn btn-sm" key={idx}>
+                                {i+1}
+                            </button>)
+                        }
+                        </div>
             </div>
         </div>
     );

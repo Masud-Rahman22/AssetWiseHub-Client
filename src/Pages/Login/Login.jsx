@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
     const { googleLogin, login } = useContext(AuthContext)
     const location = useLocation();
@@ -57,7 +58,11 @@ const Login = () => {
             })
     }
     return (
-        <div className="h-[80vh] flex items-center justify-center">
+        <div>
+        <Helmet>
+                <title>AssetWise | Login</title>
+            </Helmet>
+            <div className="h-[80vh] flex items-center justify-center">
             <form onSubmit={handleLogin} className="relative flex flex-col text-white bg-[#1a3756] shadow-md w-96 rounded-xl bg-clip-border">
                 <div className="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-gradient-to-tr from-[#ec5349] to-[#ec5349] bg-clip-border ">
                     <h3 className="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
@@ -104,6 +109,8 @@ const Login = () => {
                 </div>
             </form>
         </div>
+        </div>
+        
     );
 };
 
