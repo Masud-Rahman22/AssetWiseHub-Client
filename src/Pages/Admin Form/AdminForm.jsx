@@ -78,7 +78,7 @@ const AdminForm = () => {
         }
     }
     return (
-        <div>
+        <div className="h-fit mb-96 md:mb-1">
             <Helmet>
                 <title>AssetWise | Join As Admin</title>
             </Helmet>

@@ -90,6 +90,17 @@ const MyAssets = () => {
             }
         });
     }
+    const handleReturned = async(name) =>{
+        const returnedReq = await axiosSecure.patch(`/customRequest/${name}`)
+        if(returnedReq.data.modifiedCount > 0){
+            refetch()
+            Swal.fire({
+                title: "updated",
+                text: "Your file has been updated.",
+                icon: "success"
+            });
+        }
+    }
     return (
         <div className="h-fit">
             <Helmet>
@@ -145,7 +156,7 @@ const MyAssets = () => {
                                 <td>{info.approvedDate}</td>
                                 <td>{info.requestStatus}</td>
                                 <td>{info.requestStatus == 'pending' && <button className="btn" onClick={()=>handleDelete(info._id)}>cancel</button>}</td>
-                                <td>{info.requestStatus == 'approved' && info.assetType == 'returnable' ? <button className="btn">return</button> : ''}</td>
+                                <td>{info.requestStatus == 'approved' && info.assetType == 'returnable' ? <button onClick={()=>handleReturned(info.assetName)} className="btn">return</button> : ''}</td>
                             </tr>)
                         }
 
