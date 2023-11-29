@@ -22,7 +22,7 @@ const EmployeeHomeModal = ({info}) => {
     const handleClose = () => setOpen(false);
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+            <Button onClick={handleOpen}>View Details</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -31,7 +31,7 @@ const EmployeeHomeModal = ({info}) => {
             >
                 <Box sx={style}>
                 <Typography id="modal-modal-description">
-                        <img className='w-[200px] h-[200px] mx-auto' src={info.assetImage} alt="" />
+                        <img className='w-[200px] h-[200px] mx-auto mb-5' src={info.assetImage} alt="" />
                     </Typography>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         <div className='flex items-center justify-between'>
@@ -45,9 +45,9 @@ const EmployeeHomeModal = ({info}) => {
                         <h1>Request date : <span className='text-[#ec5349]'>{info.requestDate}</span></h1>
                         <h1>Request Status : <span className='text-[#ec5349]'>{info.requestStatus}</span></h1>
                         </div>
-                        <div className='flex'>
-                        <button className='btn btn-sm'>Update</button>
-                        <button className='btn btn-sm'>Close</button>
+                        <div className='flex justify-between items-center mt-5'>
+                        <button className='btn btn-sm btn-primary'>Update</button>
+                        <button onClick={handleClose} className='btn btn-sm btn-primary'>close</button>
                         </div>
                     </Typography>
                 </Box>

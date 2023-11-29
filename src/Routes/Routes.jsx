@@ -27,6 +27,7 @@ import Payment from "../Shared/Payment";
 import PaymentPage from "../Component/PaymentPage";
 import MyEmployeeList from "../Main Layout/Dashboard_admin/Admin_Home/MyEmployeeList";
 import MyTeam from "../Main Layout/Dashboard_admin/EmployeeHome/MyTeam";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -56,84 +57,84 @@ const router = createBrowserRouter([
             },
             {
                 path: '/servicePage',
-                element: <ServicePage></ServicePage>
+                element: <PrivateRoute><ServicePage></ServicePage></PrivateRoute>
             },
             {
                 path: '/admin-home',
-                element: <AdminEmployeeHome></AdminEmployeeHome>
+                element: <PrivateRoute><AdminEmployeeHome></AdminEmployeeHome></PrivateRoute>
             },
             {
                 path: '/payment',
-                element: <Payment></Payment>,
-                loader: ()=> fetch('http://localhost:5000/packages')
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>,
+                loader: ()=> fetch('https://asset-wise-hub-server.vercel.app/packages')
             },
             {
                 path: '/paymentPage/:_id',
-                element: <PaymentPage></PaymentPage>,
-                loader: ({params})=> fetch(`http://localhost:5000/packages/${params._id}`)
+                element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>,
+                loader: ({params})=> fetch(`https://asset-wise-hub-server.vercel.app/packages/${params._id}`)
             },
             // admin pages
             {
                 path: '/addAnAsset',
-                element: <AddAnAsset></AddAnAsset>
+                element: <PrivateRoute><AddAnAsset></AddAnAsset></PrivateRoute>
             },
             {
                 path: '/assetList',
-                element: <AssetList></AssetList>
+                element: <PrivateRoute><AssetList></AssetList></PrivateRoute>
             },
             {
                 path: '/assetUpdate/:id',
-                element: <AssetUpdate></AssetUpdate>,
-                loader: ({params})=> fetch(`http://localhost:5000/assetUpdate/${params.id}`) 
+                element: <PrivateRoute><AssetUpdate></AssetUpdate></PrivateRoute>,
+                loader: ({params})=> fetch(`https://asset-wise-hub-server.vercel.app/assetUpdate/${params.id}`) 
             },
             {
                 path: '/allRequests',
-                element: <AllRequests></AllRequests>
+                element: <PrivateRoute><AllRequests></AllRequests></PrivateRoute>
             },
             {
                 path: '/adminProfile',
-                element: <AdminProfile></AdminProfile>
+                element: <PrivateRoute><AdminProfile></AdminProfile></PrivateRoute>
             },
             {
                 path: '/adminProfileUpdate',
-                element: <AdminProfileUpdate></AdminProfileUpdate>
+                element: <PrivateRoute><AdminProfileUpdate></AdminProfileUpdate></PrivateRoute>
             },
             {
                 path: '/customRequestsLists',
-                element: <CustomRequestsLists></CustomRequestsLists>
+                element: <PrivateRoute><CustomRequestsLists></CustomRequestsLists></PrivateRoute>
             },
             {
                 path: '/addAnEmployee',
-                element: <AddAnEmployee></AddAnEmployee>
+                element: <PrivateRoute><AddAnEmployee></AddAnEmployee></PrivateRoute>
             },
             {
                 path: '/myEmployeeList',
-                element: <MyEmployeeList></MyEmployeeList>
+                element: <PrivateRoute><MyEmployeeList></MyEmployeeList></PrivateRoute>
             },
             // Employee pages
             {
                 path: '/requestForAnAsset',
-                element : <RequestForAnAsset></RequestForAnAsset>
+                element : <PrivateRoute><RequestForAnAsset></RequestForAnAsset></PrivateRoute>
             },
             {
                 path: '/makeACustomRequest',
-                element: <MakeACustomRequest></MakeACustomRequest>
+                element: <PrivateRoute><MakeACustomRequest></MakeACustomRequest></PrivateRoute>
             },
             {
                 path: '/myAssets',
-                element: <MyAssets></MyAssets>
+                element: <PrivateRoute><MyAssets></MyAssets></PrivateRoute>
             },
             {
                 path: '/employeeProfile',
-                element: <EmployeeProfile></EmployeeProfile>
+                element: <PrivateRoute><EmployeeProfile></EmployeeProfile></PrivateRoute>
             },
             {
                 path: '/employeeProfileUpdate',
-                element: <EmployeeProfileUpdate></EmployeeProfileUpdate>
+                element: <PrivateRoute><EmployeeProfileUpdate></EmployeeProfileUpdate></PrivateRoute>
             },
             {
                 path: '/myTeam',
-                element: <MyTeam></MyTeam>
+                element: <PrivateRoute><MyTeam></MyTeam></PrivateRoute>
             }
         ]    
     },

@@ -91,7 +91,7 @@ const MyAssets = () => {
         });
     }
     const handleReturned = async(name) =>{
-        const returnedReq = await axiosSecure.patch(`/customRequest/${name}`)
+        const returnedReq = await axiosSecure.patch(`/customRequest`,{name})
         if(returnedReq.data.modifiedCount > 0){
             refetch()
             Swal.fire({

@@ -43,6 +43,7 @@ const MyTeam = () => {
                             <th>Image</th>
                             <th>Name</th>                      
                             <th>Date Of Birth</th>                      
+                            <th>Birthday Status</th>                      
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +53,7 @@ const MyTeam = () => {
                                 <td>{info.name}</td>
                                 <td><img className="w-[40px] h[40px]" src={info.photo} alt="" /></td>
                                 <td>{info.dob}</td>
-                                
+                                <td>{info.birthdayStatus}</td>
                             </tr>)
                         }
 

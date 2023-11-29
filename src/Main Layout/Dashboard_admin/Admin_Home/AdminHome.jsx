@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useEffect, useState } from "react";
 // import adminGif from '../../../../public/for admin/Animation - 1701175437244.gif'
-import { PieChart, Pie, Cell, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer} from 'recharts';
 import adminPic from '../../../../public/for admin/50426.jpg'
 import adminPic2 from '../../../../public/for admin/2002.i039.018_remote_management_distant_work_isometric_icons-15.jpg'
 import { Helmet } from "react-helmet-async";
@@ -167,14 +167,17 @@ const AdminHome = () => {
 
             {/* pie chart */}
 
-            <PieChart width={400} height={400}>
+            <div className="flex flex-col lg:flex-row">
+                <div style={{ width: '100%', height: '500px' }}>
+                    <ResponsiveContainer>
+                <PieChart width={500} height={500}>
                 <Pie
                     data={data}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={80}
+                    outerRadius={150}
                     fill="#8884d8"
                     dataKey="value"
                 >
@@ -184,6 +187,13 @@ const AdminHome = () => {
                 </Pie>
                 <Legend></Legend>
             </PieChart>
+            </ResponsiveContainer>
+                </div>
+                <div className="lg:mt-32 p-10 lg:p-1">
+                    <h1 className="text-4xl md:text-6xl text-[#ec5349]">Visual Representation of Data</h1>
+                <p className=" mx-auto text-2xl text-white lg:mt-10">Explore our comprehensive collection of charts illustrating various data sets and trends. Each chart provides a clear and insightful visual representation, aiding in the understanding and analysis of complex information.</p>
+                </div>
+            </div>
 
             <div className="flex flex-col lg:flex-row items-center justify-center my-20">
                 <div className="flex-1 text-left space-y-10 ml-10">
