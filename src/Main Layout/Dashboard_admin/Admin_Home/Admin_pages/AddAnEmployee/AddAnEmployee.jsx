@@ -60,7 +60,7 @@ const AddAnEmployee = () => {
         <div className="h-fit">
             <Helmet>
                 <title>AssetWise | Add An Employee</title>
-            </Helmet>
+            </Helmet>z
             <div className="text-center my-10">
                 <Link to='/payment'><button className="btn bg-[#ec5349] btn-lg border-none text-white">Hey There, Buy a package</button></Link>
             </div>
