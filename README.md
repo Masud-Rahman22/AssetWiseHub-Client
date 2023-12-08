@@ -5,14 +5,22 @@ live link : [https://assetwisehub.web.app/](https://assetwisehub.web.app/)
 ANS - 
 
 
-    * This is a blog related website so the first thing of this project is you can post a blog and the recent six blogs will be shown in the homepage and there are also a newsletter section in the homepage so that you can subscribe"
+    * As an admin you can hire an employee who is not hired yet by
+    purchasing a specific package for member limit and then you can also
+    make a team with certain employees. To make this I used Stripe.js for
+    payment, React, MongoDB for database, in backend node.js and
+    express.js
 
-    * After that we also have a update blog system so that you can update your blog anytime you want. The update option is only available for the blog owner other persons can not update the blog.
 
-    *We have a feature blogs section which is showed in a table format.In the table the top ten posts depend on their description is stored serially and the blog owner's photo and name is also showed.
+    *An admin can see the custom request list of employees and all
+    requests just so you know you can add an asset too. As an employee
+    you can make custom requests and see your team. To make this I
+    used React, MongoDB for database, in backend node.js and
+    express.js
 
-    *The most exciting part is in the blog details page.One can see the blog details with every information and can also comment in the blog expect the owner of the blog and below the section we can see the comments with the picture and name of the commenter.
-
-    *As usual we have the login and register options so that people can login and post blogs about anything they want and also have the logout option to logout.We have a user friendly interface with great animation.
+    
+    *To make things interesting we have birthday options for employees
+    on the team page and all types of requests are shown in the admin
+    home and employee home page which is Informative
 
 
