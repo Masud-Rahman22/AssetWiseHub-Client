@@ -1,4 +1,4 @@
-live link : [https://blogbloom-e6aea.web.app/](https://blogbloom-e6aea.web.app/)
+live link : [https://assetwisehub.web.app/](https://assetwisehub.web.app/)
 ## Writing about my project in at least five bullet points
 
 
