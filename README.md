@@ -1,5 +1,4 @@
 live link : [https://assetwisehub.web.app/](https://assetwisehub.web.app/)
-## Writing about my project in at least five bullet points
 
 
 ANS - 
