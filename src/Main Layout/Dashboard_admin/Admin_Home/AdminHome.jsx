@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import animation1 from '../../../../public/animation/Animation - 1704040907746.json'
+import animation2 from '../../../../public/animation/Animation - 1704042969120.json'
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useEffect, useState } from "react";
 // import adminGif from '../../../../public/for admin/Animation - 1701175437244.gif'
 import { PieChart, Pie, Cell, Legend, ResponsiveContainer} from 'recharts';
-import adminPic from '../../../../public/for admin/50426.jpg'
-import adminPic2 from '../../../../public/for admin/2002.i039.018_remote_management_distant_work_isometric_icons-15.jpg'
 import { Helmet } from "react-helmet-async";
+import Lottie from "lottie-react";
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const AdminHome = () => {
     const axiosSecure = UseAxiosSecure();
@@ -74,7 +75,8 @@ const AdminHome = () => {
                 </div>
                 <div className="flex-1 mx-auto">
                     {/* <img className="w-[300px] h-[300px]" src={adminGif} alt="" /> */}
-                    <img className="md:w-[500px] md:h[200px]" src={adminPic} alt="" />
+                    {/* <img className="md:w-[500px] md:h[200px]" src={adminPic} alt="" /> */}
+                    <Lottie className="md:w-[500px] md:h[200px]" animationData={animation2}></Lottie>
                 </div>
             </div>
             <div>
@@ -201,7 +203,8 @@ const AdminHome = () => {
                     <p className="text-[#ec5349] text-xl pb-10 lg:pb-1">The Admin Control Center serves as the central hub for managing and overseeing the entire platform. As an administrator, this section provides access to user management, system configurations, analytics, and various tools crucial for maintaining the platform is functionality and security. From user permissions to system settings, this control center empowers administrators with the tools and authority necessary to ensure smooth operations, enforce policies, and make informed decisions to optimize the platform is performance and user experience.</p>
                 </div>
                 <div className="flex-1">
-                    <img className="w-[500px] h-[500px] lg:ml-36" src={adminPic2} alt="" />
+                    <Lottie className="w-[500px] h-[500px] lg:ml-36" animationData={animation1}></Lottie>
+                    {/* <img className="w-[500px] h-[500px] lg:ml-36" src={adminPic2} alt="" /> */}
                 </div>
             </div>
         </div>
