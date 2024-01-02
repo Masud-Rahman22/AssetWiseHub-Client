@@ -19,3 +19,41 @@
     /* Show pointer cursor on hover */
     /* Add any additional styling you desire */
 }
+.gradient{
+    /* For browsers that support gradients */
+    background: #ec5349;
+    /* Fallback color if gradients are not supported */
+    background: linear-gradient(to right, #ec5349, #a80077);
+    /* Gradient */
+
+    /* Button styling */
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    border: none;
+    color: black;
+    /* Text color */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Show pointer cursor on hover */
+    /* Add any additional styling you desire */
+}
+.button {
+    /* For browsers that support gradients */
+    background: #ec5349;
+    /* Fallback color if gradients are not supported */
+    background: linear-gradient(to right, #ec5349, #a80077);
+    /* Gradient */
+
+    /* Button styling */
+    padding: 20px 20px;
+    /* Adjust padding as needed */
+    border: none;
+    color: white;
+    /* Text color */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Show pointer cursor on hover */
+    /* Add any additional styling you desire */
+}
